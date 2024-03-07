@@ -8,7 +8,9 @@ load_dotenv('.env')
 TOKEN = os.getenv("TOKEN")
 CHAT_C = os.getenv("CHAT_C")
 CHAT_R = os.getenv("CHAT_R")
-administradores = os.getenv("TOKEN").split('-')
+administradores = [int(x) for x in os.getenv("ADMINS").split('-')]
+
+max_links = 20
 
 chats = {
     "c" : {
@@ -58,7 +60,8 @@ def generateKeyboard(prefix, start, end):
 
 @bot.message_handler(func=lambda message: message.text == 'gen' and message.from_user.id in administradores)
 def start(message):
-    keyboard = generateKeyboard("gen", 1, 4)
+    print(message)
+    keyboard = generateKeyboard("gen", 1, max_links)
     bot.send_message(
                     message.chat.id, "❇️ Selecciona un número ❇️\nObs:*El numero sera el numeros de link a generar!*",
                     reply_markup=keyboard,
@@ -75,11 +78,11 @@ def callback_handler(call):
             bot.edit_message_text(text=f'♾️ Elige a que chat vas a generar {num} link/s: ♾️', chat_id=call.message.chat.id, message_id=call.message.id, reply_markup=keyboard  )
 
         if call.data=="atras":
-            keyboard = generateKeyboard("gen", 1, 4)
+            keyboard = generateKeyboard("gen", 1, max_links)
             bot.edit_message_text(text="❇️ Selecciona un número ❇️", chat_id=call.message.chat.id, message_id=call.message.id, reply_markup=keyboard  )
             
         if call.data.startswith('chat'):
-            keyboard = generateKeyboard("gen", 1, 4)
+            keyboard = generateKeyboard("gen", 1, max_links)
             bot.edit_message_text(text="❇️ Selecciona un número ❇️", chat_id=call.message.chat.id, message_id=call.message.id, reply_markup=keyboard  )
 
             info=call.data.split('-')

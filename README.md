@@ -11,12 +11,15 @@ The bot provides functionality to generate invitation links for specific types o
 1. Clone or download the repository.
 2. Install the required dependencies using pip:
  ```bash
- pip install python-telegram-bot python-dotenv
+ cd telegramBot
+ ```
+ ```bash
+ pip install telebot python-dotenv
  ```
 3. Create a .env file and add the necessary environment variables (TOKEN, CHAT_C, CHAT_R, etc.).
 4. Run the Python script:
 ```bash
-python your_script_name.py
+python app.py
 ```
 
 ## Usage
@@ -34,6 +37,7 @@ Make sure to set up the following environment variables in the `.env` file:
 - `TOKEN`: Your Telegram bot token.
 - `CHAT_C`: ID of the clients' chat.
 - `CHAT_R`: ID of the resellers' chat.
+- `ADMINS`: All admin IDs divided by -
 - Other necessary variables as required by your implementation.
 
 ## Contributing 🤝
